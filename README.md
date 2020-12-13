@@ -14,7 +14,7 @@ Then maybe you will stand a chance at stopping the hero.
 As Project Dungeon is a Unity game, the project contains a strict file structure which I am unable to change too greatly.
 The Assets folder contains everything that I created, edited, or implemented directly.
 If you would just like to read the code that I wrote for this project, then navigate to the ".../Assets/Scripts" directory to see the C# scripts that make the game work!
-Want to open and edit the game in the Unity editor? Just clone the project and open the unzipped file in the editor as a new project.
+Want to open and edit the game in the Unity editor? Just clone the project and open the unzipped folder in the editor as a new project.
 
 Just want to play? Than head to the releases and follow the instruction in the newest release! https://github.com/AntonioMast/ProjectDungeon/releases
 
