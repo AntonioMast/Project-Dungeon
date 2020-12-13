@@ -1,2 +1,2 @@
 # ProjectDungeon
-Project Dungeon is a Unity game that aims to implement & revolves around an engaging A.I. Opponent.
+Project Dungeon is a Unity game that aimed to implement (and revolves around!) an engaging A.I. Opponent.
