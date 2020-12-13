@@ -1,14 +1,22 @@
-﻿using System.Collections;
+﻿/***************************************************************
+ * This code is applied to stage objects.
+ * It handles trivialthings needed with the stages
+ **************************************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class StageScript : MonoBehaviour
 {
+    //*********************
+    //Variable Declarations
+    //*********************
     public bool staySpawned;
     int counterSinceSpawn;
 
-    // Start is called before the first frame update
+    //This function only runs when the object is created
+    //it is used to set variables to initial values
     void Start()
     {
         staySpawned = false;
@@ -20,9 +28,10 @@ public class StageScript : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //This script runs sixty times per a second.
     void FixedUpdate()
     {
+        //checks if a stage is spawned in the correction location. If not, it is deleted.
         if (counterSinceSpawn > 0)
         {
             counterSinceSpawn -= 1;

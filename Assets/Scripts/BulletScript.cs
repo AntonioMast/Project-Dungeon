@@ -1,17 +1,19 @@
-﻿using System.Collections;
+﻿/***************************************************************
+ * This code is applied to bullet prefab objects.
+ * This scripts handles bullet collision and despawning.
+ **************************************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    //*********************
+    //Variable Declarations
+    //*********************
     float timer = 0.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    //this function runs once per frame
     void Update()
     {
         timer += Time.deltaTime;
@@ -20,9 +22,10 @@ public class BulletScript : MonoBehaviour
         { Destroy(gameObject); }
     }
 
+    //this functions runs when an object enters this objects collision
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag.Contains("bullet") == true)
+        if (collision.gameObject.tag == "Floor" || collision.gameObject.tag.Contains("bullet") == true)//destroys the bullet if it comes in contact with a floor or another bullet
         {
             Destroy(gameObject);
         }

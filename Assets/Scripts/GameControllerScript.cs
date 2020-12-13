@@ -1,10 +1,19 @@
-﻿using System.Collections;
+﻿/******************************************************
+ * This code is applied to the EventSystem object.
+ * The purpose of this script is to handle all
+ * events and caluclations needed for the general
+ * game state.
+*******************************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
+    //*********************
+    //Variable Declarations
+    //*********************
     public Slider cooldownSlider;
 
     GameObject ScoreObj;
@@ -30,7 +39,8 @@ public class GameControllerScript : MonoBehaviour
     public GameObject objectSpawned3;
     public GameObject objectSpawned4;
 
-    // Start is called before the first frame update
+    //This function only runs when the object is created
+    //it is used to set variables to initial values
     void Start()
     {
         ScoreObj = GameObject.Find("ScoreValue");
@@ -46,41 +56,42 @@ public class GameControllerScript : MonoBehaviour
         currencyAdditionPrice = 25;
     }
 
-    // Update is called once per frame
+    //this functions runs once per frame
     void Update()
     {
+        //runs the timer that is used to slowly increase the score
         timer += Time.deltaTime;
         seconds = timer % 60;
 
-        if (spawnTimer > 0)
+        if (spawnTimer > 0) //lets the timer run
         {
             spawnTimer -= (Time.deltaTime % 60);
             if (spawnTimer < 0) { spawnTimer = 0f; }
         }
 
-        if (clickedCurrencyTimer > 0)
+        if (clickedCurrencyTimer > 0) //lets the currency timer run
         {
             clickedCurrencyTimer -= (Time.unscaledDeltaTime % 60);
             if (clickedCurrencyTimer < 0) { clickedCurrencyTimer = 0f; }
         }
 
-        for (seconds = seconds; seconds > 1f; seconds = seconds - 1f)
+        for (seconds = seconds; seconds > 1f; seconds = seconds - 1f) //when the timer stops, the score and currency is increased, and the timer is reset
         {
             timer = 0;
             score += 10;
             currency += currencyAddition;
         }
 
-        pauseHandler();
         setCooldownBar();
         UpdateCurrencyToScreen();
         spawnEnemies();
         UpdateScoreToScreen();
     }
 
+    //this function runs once called and multiples the amount of currency gained per second by 1.6
     public void IncreaseCurrencyEarned()
     {
-        if (currency >= currencyAdditionPrice)
+        if (currency >= currencyAdditionPrice) //checks if the currency had is enough to pay for the upgrade
         {
             currency -= currencyAdditionPrice;
             currencyAddition += 1;
@@ -89,55 +100,45 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
-    public void pauseHandler()
-    {
-        if (Input.GetKeyDown("space"))
-        {
-            if (Time.timeScale == 0)
-            { Time.timeScale = 1f; }
-
-            else
-            { Time.timeScale = 0; }
-        }
-
-    }
-
+    //this function runs once per frame and updates the value of the cooldown bar that is drawn to the screen
     public void setCooldownBar()
     {
         cooldownSlider.value = spawnTimer;
     }
 
+    //this function runs once called and sets the index of the object to spawn to whichever item is clicked by the player
     public void SetObjectIndex(int i)
     {
-        switch (i)
+        switch (i) //sets the index of the object to spawn to whichever item is clicked by the player
         {
-            case 0:
+            case 0://null
                 objectSpawned = null;
                 price = 0;
                 break;
-            case 1:
+            case 1://trap
                 objectSpawned = objectSpawned1;
                 price = 3;
                 break;
-            case 2:
+            case 2://zombie
                 objectSpawned = objectSpawned2;
                 price = 6;
                 break;
-            case 3:
+            case 3://zombie group
                 objectSpawned = objectSpawned3;
                 price = 20;
                 break;
-            case 4:
+            case 4://turret
                 objectSpawned = objectSpawned4;
                 price = 30;
                 break;
-            default:
+            default://null
                 objectSpawned = null;
                 price = 0;
                 break;
         }
     }
 
+    //this function runs once per frame and handles the player spawning enemies when clicking on the screen
     void spawnEnemies()
     {
         Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
@@ -158,16 +159,19 @@ public class GameControllerScript : MonoBehaviour
         }
     }
 
+    //this function runs once per frame and updates the score drawn to the screen
     void UpdateScoreToScreen()
     {
         ScoreText.text = score.ToString();
     }
 
+    //this function runs once per frame and updates the currency drawn to the screen
     void UpdateCurrencyToScreen()
     {
         CurrencyText.text = "$" + currency.ToString();
     }
 
+    //this function runs once called and increases the currency had by one per click on the corresponding button
     public void ClickedCurrency()
     {
         if (Time.timeScale == 1 && clickedCurrencyTimer <= 0f)

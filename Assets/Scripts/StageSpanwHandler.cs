@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/***************************************************************
+ * This code is applied to the game handler object.
+ * It handles major things needed with the stages such as with
+ * stage creation.
+ **************************************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,7 +12,9 @@ using UnityEngine.SceneManagement;
 
 public class StageSpanwHandler : MonoBehaviour
 {
-
+    //*********************
+    //Variable Declarations
+    //*********************
     GameObject Stage;
     public GameObject Stage1;
     public GameObject Stage2;
@@ -18,29 +25,27 @@ public class StageSpanwHandler : MonoBehaviour
     public GameObject Stage7;
     public GameObject Stage8;
 
-    // Start is called before the first frame update
+    //This function only runs when the object is created
+    //it is used to set variables to initial values
     void Start()
     {
-        Stage = null;
+        Stage = null; //sets the index to null
     }
 
-    // Update is called once per frame
+    //this function runs once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Input.mousePosition.x < Screen.width/1.3 && SceneManager.GetActiveScene().name == "GameSceen")
-        {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Input.mousePosition.x < Screen.width/1.3 && SceneManager.GetActiveScene().name == "GameSceen")//gets the location relative to the 
+        {                                                                                                                                     //gameworld that the player clicks
             Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition, Camera.MonoOrStereoscopicEye.Mono);
-
             Vector3 finalVec = new Vector3(worldPoint.x, worldPoint.y, 0.5f);
-
             SpawnStage(finalVec);
         }
-
     }
 
+    //this script is called when the mouse is clicked in the stage creation area--it handles spawning the correct stage.
     public void SpawnStage(Vector3 mPosition)
     {
-        
         GameObject tmp = Instantiate(Stage) as GameObject;
         tmp.transform.position = mPosition;
         tmp.transform.parent = GameObject.Find("GameController").transform;
@@ -52,7 +57,11 @@ public class StageSpanwHandler : MonoBehaviour
     //0 - starting stage
     //1 - default
     //2 - horizontal straight
-    //3+ - ????
+    //3 - vertical straight
+    //4 - corner
+    //5 - corner
+    //6 - corner
+    //7 - corner
     //*************************************************************
     public void  SetStageIndex(int i)
     {

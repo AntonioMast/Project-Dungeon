@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿/***************************************************************
+ * This code is applied to the turret enemy objects.
+ * It handles major things needed by them such as shooting.
+ **************************************************************/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretScript : MonoBehaviour
 {
+    //*********************
+    //Variable Declarations
+    //*********************
     public int health = 2;
     int layerMask;
 
@@ -15,32 +22,34 @@ public class TurretScript : MonoBehaviour
     private float distanceToTarget;
     public float attackRange;
 
-    // Start is called before the first frame update
+    //This function only runs when the object is created
+    //it is used to set variables to initial values
     void Start()
     {
         layerMask = ~(1 << LayerMask.NameToLayer("Enemy") | 1 << LayerMask.NameToLayer("AINode"));
     }
 
-    // Update is called once per frame
+    //this function runs once per frame
     void Update()
     {
         checkIfTimeToFire();
     }
 
+    //this functions is called once per frame and is used to handle shooting at the A.I. hero opponent
     private void checkIfTimeToFire()
     {
         GameObject Hero = GameObject.Find("Hero");
         float distanceToTarget = Vector3.Distance(Hero.transform.position, transform.position);
 
-        //heres the rest
-        if (distanceToTarget != null && distanceToTarget <= attackRange)
+        
+        if (distanceToTarget != null && distanceToTarget <= attackRange) //checks if the hero is in attack range.
         {
             float timeUntilNextAttack = (lastAttackTime + attackDelay);
-            if (Time.time >= timeUntilNextAttack)
+            if (Time.time >= timeUntilNextAttack) //checks if the turret is on cooldown
             {
                 RaycastHit2D Hit = Physics2D.Raycast(transform.position, (Hero.transform.position - transform.position).normalized, attackRange, layerMask);
 
-                if (Hit.transform.tag == "Hero")
+                if (Hit.transform.tag == "Hero") //checks if any objects are in the way of the hero (such as walls)
                 {
                     Vector3 tmp = (Hero.transform.position - transform.position).normalized;
                     GameObject newBullet = Instantiate(bullet, transform.position, transform.rotation);
@@ -52,9 +61,10 @@ public class TurretScript : MonoBehaviour
         }
     }
 
+    //this function runs when another objects collides with object
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "bullet")
+        if (collision.gameObject.tag == "bullet") //if the turret is hit by the A.I. opponent, it loses health until it dies.
         {
             Destroy(collision.gameObject);
             health -= 1;
