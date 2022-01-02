@@ -1,20 +1,15 @@
 # ProjectDungeon: A Task in Creating Engaging A.I. Opponents in Games
 Project Dungeon is a Unity Game with the primary purpose of creating an engaging A.I. Opponent.
-The games lets the player design and create a 'dungeon', or level, and fight an  A.I. opponent as it attempts to traverse the dungeon.
+This game lets players design and create their own dungeon level on which they will fight an  A.I. "hero" opponent as it navigates the dungeon in an attempt to find the exit.
 
-There are two main game states that player will have fun exploring:
+There are two main game states for players to enjoy:
 
-The Design State - This state revolves around designing a dungeon using premade map pieces. The player can make winding hallways, looping paths, and more!
+The Design State - This state revolves around designing a dungeon using premade map pieces. Players can make winding hallways, looping paths, and whatever else they can imagine!
 
-The Play State - Designing a dungeon wouldn't be any fun if there was nothing to do! This state revolves around defeating the A.I. opponent as it navigates your dungeon.
-Here, you will carefully manage your currency and buy spawnable minions that try to stop the A.I. opponent. No minion is strong on it's own, but together with more minions?
-Then maybe you will stand a chance at stopping the hero.
+The Play State - Designing a dungeon wouldn't be nearly as fun if there was nothing to do with it! The Play State revolves around creating traps and monsters in order to defeat the A.I. hero opponent as it navigates through your dungeon in real time. Players will need to carefully manage their currency as they place their traps, however. As with everything else in life, nothing is really free.
 
 # Instructions
-As Project Dungeon is a Unity game, the project contains a strict file structure which I am unable to change too greatly.
-The Assets folder contains everything that I created, edited, or implemented directly.
-If you would just like to read the code that I wrote for this project, then navigate to the ".../Assets/Scripts" directory to see the C# scripts that make the game work!
-Want to open and edit the game in the Unity editor? Just clone the project and open the unzipped folder in the editor as a new project.
+Simply import the unzipped project into the Unity editor as a new project in order to edit it.
 
 Just want to play? Than head to the releases and follow the instruction in the newest release! https://github.com/AntonioMast/ProjectDungeon/releases
 
